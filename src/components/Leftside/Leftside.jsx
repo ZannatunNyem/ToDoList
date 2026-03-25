@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, NavLink, Outlet } from "react-router";
 import {
   ListTodo,
@@ -76,18 +76,37 @@ export default function Leftside() {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(result.value);
+        const { text, date, priority } = result.value;
+        const taskData = { text, date, priority, status: "pending" };
+
+        fetch("http://localhost:5000/allTask", {
+          method: "POST",
+
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(taskData),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
 
         // Example: use the data
-        const { text, date, priority } = result.value;
-        console.log(result.value);
+        // const { text, date, priority } = result.value;
+        // console.log(result.value);
 
-        Swal.fire({
-          icon: "success",
-          title: "Task Added!",
-          text: `${text} (${priority})`,
-          timer: 1500,
+        Swal.mixin({
+          toast: true,
+          position: "top-end",
           showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        }).fire({
+          icon: "success",
+          title: "Task Added successfully!",
         });
 
         // 👉 You can now push this to your task list / state
