@@ -57,7 +57,7 @@ export default function Leftside() {
       focusConfirm: false,
       showCancelButton: true,
       confirmButtonText: "Add Task",
-      // 👉 PUT IT HERE
+
       confirmButtonColor: "#3a3df3",
       background: "#f9fafb",
       preConfirm: () => {
@@ -76,6 +76,7 @@ export default function Leftside() {
       },
     }).then((result) => {
       if (result.isConfirmed) {
+        // setTask(result.value);
         const { text, date, priority } = result.value;
         const taskData = { text, date, priority, status: "pending" };
 
@@ -88,11 +89,10 @@ export default function Leftside() {
           body: JSON.stringify(taskData),
         })
           .then((res) => res.json())
-          .then((data) => console.log(data));
-
-        // Example: use the data
-        // const { text, date, priority } = result.value;
-        // console.log(result.value);
+          .then((data) => {
+            console.log(data);
+            window.location.reload();
+          });
 
         Swal.mixin({
           toast: true,
@@ -108,8 +108,6 @@ export default function Leftside() {
           icon: "success",
           title: "Task Added successfully!",
         });
-
-        // 👉 You can now push this to your task list / state
       }
     });
   };
@@ -117,7 +115,7 @@ export default function Leftside() {
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col min-h-screen ">
-        {/* Page content here */}
+        {/*  content  */}
 
         <div className="navbar bg-base-100 w-full">
           <div className="flex-none lg:hidden">
@@ -141,7 +139,9 @@ export default function Leftside() {
               </svg>
             </label>
           </div>
-          <div className="mx-2 flex-1 px-2 text-2xl font-bold ">To Do List</div>
+          <div className="mx-2 flex-1 px-2 text-2xl font-bold font-serif">
+            ToDo List
+          </div>
 
           <div className="hidden flex-none lg:block"></div>
           <button
@@ -166,7 +166,7 @@ export default function Leftside() {
         <ul className="menu bg-base-200 min-h-full w-80 p-4 pt-10">
           <li>
             <NavLink
-              to="/allTask"
+              to="/"
               className={({ isActive }) =>
                 `flex items-center gap-2 ${isActive ? "bg-base-300 text-white" : ""}`
               }
@@ -197,6 +197,17 @@ export default function Leftside() {
             >
               <Clock3 size={18} />
               Upcoming
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/progress"
+              className={({ isActive }) =>
+                `flex items-center gap-2 ${isActive ? "bg-base-300 text-white" : ""}`
+              }
+            >
+              <ChartColumn size={18} />
+              Progress
             </NavLink>
           </li>
         </ul>

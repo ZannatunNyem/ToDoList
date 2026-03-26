@@ -1,52 +1,56 @@
-import { Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { FaTrash } from "react-icons/fa";
 
+import DeleteBtn from "../Delete btn/DeleteBtn";
+import StatusBtn from "../StatusBtn/StatusBtn";
+import Loading from "../Loading/Loading";
 export default function Upcoming() {
   const [tasks, setTasks] = useState([]);
+
+  //reload
+  const [reload, setReload] = useState(false);
+  //loading
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    setLoading(true);
     fetch("http://localhost:5000/upcomingTask")
       .then((res) => res.json())
       .then((data) => setTasks(data));
-  }, []);
+    setLoading(false);
+  }, [reload]);
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <div className="ml-10 ">
-      <h2 className="text-2xl font-bold mb-4">Upcoming Tasks</h2>
-
+      <h2 className="text-3xl font-bold mb-6 font-serif">Upcoming Tasks</h2>
       <div>
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
             <thead>
               <tr>
-                <th>
-                  <label>
-                    <input type="checkbox" className="checkbox" />
-                  </label>
-                </th>
+                <th>No</th>
                 <th>Task Description</th>
                 <th>Priority</th>
                 <th>Due Date</th>
                 <th>Status</th>
-                <th></th>
+                <th>Delete</th>
               </tr>
             </thead>
-            {tasks.map((task) => (
+            {tasks.map((task, index) => (
               <tbody key={task._id}>
-                {/* row 1 */}
+                {/* row  */}
                 <tr>
                   <th>
-                    <label>
-                      <input type="checkbox" className="checkbox" />
-                    </label>
+                    <div className="text-2xl font-light opacity-50">
+                      0{index + 1}
+                    </div>
                   </th>
                   <td>
                     <div className="flex items-center gap-3">
                       <div>
                         <div className="font-semibold">{task.text}</div>
-                        {/* <div className="text-sm opacity-50">
-                          {task.priority}
-                        </div> */}
                       </div>
                     </div>
                   </td>
@@ -59,22 +63,22 @@ export default function Upcoming() {
                   </td>
                   <td>{task.date}</td>
                   <td>
-                    <span
-                      className={`badge ${task.status === "pending" ? "badge-warning" : "badge-success"}`}
-                    >
-                      {task.status}
-                    </span>
+                    <StatusBtn
+                      task={task}
+                      reload={reload}
+                      setReload={setReload}
+                    ></StatusBtn>
                   </td>
                   <th>
-                    <button className="text-red-600 text-lg cursor-pointer hover:scale-110 transition">
-                      <FaTrash />
-                    </button>
+                    <DeleteBtn
+                      id={task._id}
+                      tasks={tasks}
+                      setTasks={setTasks}
+                    ></DeleteBtn>
                   </th>
                 </tr>
-                {/* row 2 */}
               </tbody>
             ))}
-            {/* foot */}
           </table>
         </div>
       </div>

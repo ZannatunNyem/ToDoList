@@ -3,7 +3,7 @@ import relax from "../../assets/relax.png";
 
 export default function Footer() {
   return (
-    <div className="">
+    <div className="mt-10">
       <img src={relax} alt="" srcset="" />
     </div>
   );
