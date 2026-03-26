@@ -15,8 +15,10 @@ export default function Upcoming() {
     setLoading(true);
     fetch("https://to-do-list-server-gules.vercel.app/upcomingTask")
       .then((res) => res.json())
-      .then((data) => setTasks(data));
-    setLoading(false);
+      .then((data) => {
+        setTasks(data);
+        setLoading(false);
+      });
   }, [reload]);
   if (loading) {
     return <Loading />;
