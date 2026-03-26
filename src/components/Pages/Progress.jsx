@@ -11,7 +11,7 @@ export default function Progress() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/allTask")
+    fetch("https://to-do-list-server-gules.vercel.app/allTask")
       .then((res) => res.json())
       .then((data) => setTasks(data));
     setLoading(false);

@@ -80,7 +80,7 @@ export default function Leftside() {
         const { text, date, priority } = result.value;
         const taskData = { text, date, priority, status: "pending" };
 
-        fetch("http://localhost:5000/allTask", {
+        fetch("https://to-do-list-server-gules.vercel.app/allTask", {
           method: "POST",
 
           headers: {
