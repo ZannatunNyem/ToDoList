@@ -39,50 +39,51 @@ export default function Today() {
                 <th>Delete</th>
               </tr>
             </thead>
-            {tasks.map((task, index) => (
-              <tbody key={task._id}>
-                {/* row */}
-                <tr>
-                  <th>
-                    <div className="text-2xl font-light opacity-50">
-                      0{index + 1}
-                    </div>
-                  </th>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div>
-                        <div className="font-semibold">{task.text}</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <span
-                      className={`badge ${task.priority === "ordinary" ? "badge-ghost" : "badge-info"}`}
-                    >
-                      {task.priority}
-                    </span>
-                  </td>
-                  <td>{task.date}</td>
-                  <td>
-                    {" "}
-                    <StatusBtn
-                      task={task}
-                      reload={reload}
-                      setReload={setReload}
-                    ></StatusBtn>
-                  </td>
-                  <th>
+            {Array.isArray(tasks) &&
+              tasks.map((task, index) => (
+                <tbody key={task._id}>
+                  {/* row */}
+                  <tr>
                     <th>
-                      <DeleteBtn
-                        id={task._id}
-                        tasks={tasks}
-                        setTasks={setTasks}
-                      ></DeleteBtn>
+                      <div className="text-2xl font-light opacity-50">
+                        0{index + 1}
+                      </div>
                     </th>
-                  </th>
-                </tr>
-              </tbody>
-            ))}
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div>
+                          <div className="font-semibold">{task.text}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <span
+                        className={`badge ${task.priority === "ordinary" ? "badge-ghost" : "badge-info"}`}
+                      >
+                        {task.priority}
+                      </span>
+                    </td>
+                    <td>{task.date}</td>
+                    <td>
+                      {" "}
+                      <StatusBtn
+                        task={task}
+                        reload={reload}
+                        setReload={setReload}
+                      ></StatusBtn>
+                    </td>
+                    <th>
+                      <th>
+                        <DeleteBtn
+                          id={task._id}
+                          tasks={tasks}
+                          setTasks={setTasks}
+                        ></DeleteBtn>
+                      </th>
+                    </th>
+                  </tr>
+                </tbody>
+              ))}
           </table>
         </div>
       </div>

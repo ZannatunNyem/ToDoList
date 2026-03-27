@@ -42,47 +42,48 @@ export default function AllTask() {
                 <th>Delete</th>
               </tr>
             </thead>
-            {tasks.map((task, index) => (
-              <tbody key={task._id}>
-                {/* row  */}
-                <tr>
-                  <th>
-                    <div className="text-2xl font-light opacity-50">
-                      0{index + 1}
-                    </div>
-                  </th>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div>
-                        <div className="font-semibold">{task.text}</div>
+            {Array.isArray(tasks) &&
+              tasks.map((task, index) => (
+                <tbody key={task._id}>
+                  {/* row  */}
+                  <tr>
+                    <th>
+                      <div className="text-2xl font-light opacity-50">
+                        0{index + 1}
                       </div>
-                    </div>
-                  </td>
-                  <td>
-                    <span
-                      className={`badge ${task.priority === "ordinary" ? "badge-ghost" : "badge-info"}`}
-                    >
-                      {task.priority}
-                    </span>
-                  </td>
-                  <td>{task.date}</td>
-                  <td>
-                    <StatusBtn
-                      task={task}
-                      reload={reload}
-                      setReload={setReload}
-                    ></StatusBtn>
-                  </td>
-                  <th>
-                    <DeleteBtn
-                      id={task._id}
-                      tasks={tasks}
-                      setTasks={setTasks}
-                    ></DeleteBtn>
-                  </th>
-                </tr>
-              </tbody>
-            ))}
+                    </th>
+                    <td>
+                      <div className="flex items-center gap-3">
+                        <div>
+                          <div className="font-semibold">{task.text}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <span
+                        className={`badge ${task.priority === "ordinary" ? "badge-ghost" : "badge-info"}`}
+                      >
+                        {task.priority}
+                      </span>
+                    </td>
+                    <td>{task.date}</td>
+                    <td>
+                      <StatusBtn
+                        task={task}
+                        reload={reload}
+                        setReload={setReload}
+                      ></StatusBtn>
+                    </td>
+                    <th>
+                      <DeleteBtn
+                        id={task._id}
+                        tasks={tasks}
+                        setTasks={setTasks}
+                      ></DeleteBtn>
+                    </th>
+                  </tr>
+                </tbody>
+              ))}
           </table>
         </div>
       </div>
