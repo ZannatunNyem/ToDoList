@@ -5,7 +5,7 @@ export default function StatusBtn({ task, reload, setReload }) {
     const newStatus = task.status === "pending" ? "finished" : "pending";
 
     fetch(
-      `https://to-do-list-server-gules.vercel.app/updateStatus/${task._id}`,
+      `https://to-do-list-backend-two.vercel.app/updateStatus/${task._id}`,
       {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },

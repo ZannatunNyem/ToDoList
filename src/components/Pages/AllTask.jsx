@@ -14,7 +14,7 @@ export default function AllTask() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://to-do-list-server-gules.vercel.app/allTask")
+    fetch("https://to-do-list-backend-two.vercel.app/allTask")
       .then((res) => res.json())
       .then((data) => {
         setTasks(data);

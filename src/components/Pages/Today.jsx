@@ -12,7 +12,7 @@ export default function Today() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(true);
-    fetch("https://to-do-list-server-gules.vercel.app/todayTask")
+    fetch("https://to-do-list-backend-two.vercel.app/todayTask")
       .then((res) => res.json())
       .then((data) => {
         setTasks(data);

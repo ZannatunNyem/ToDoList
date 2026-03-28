@@ -16,7 +16,7 @@ export default function DeleteBtn({ id, tasks, setTasks }) {
     }).then((result) => {
       if (result.isConfirmed) {
         //  if confirmed
-        fetch(`https://to-do-list-server-gules.vercel.app/delete/${id}`, {
+        fetch(`https://to-do-list-backend-two.vercel.app/delete/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

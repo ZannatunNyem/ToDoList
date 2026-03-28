@@ -13,7 +13,7 @@ export default function Upcoming() {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://to-do-list-server-gules.vercel.app/upcomingTask")
+    fetch("https://to-do-list-backend-two.vercel.app/upcomingTask")
       .then((res) => res.json())
       .then((data) => {
         setTasks(data);
